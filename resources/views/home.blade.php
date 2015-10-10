@@ -1,7 +1,7 @@
 @extends("layouts.main")
 
 @section('page_title')
-    CV: {{$name}}
+    CV: {{$user->name}}
 @stop
 
 @section("main_content")
@@ -14,7 +14,7 @@
               <img src="{{URL::to('/assets/img/display_pic.jpg')}}" alt="avatar">
             </div>
             <div id="text-header">
-              <h1>Hello,<br> my name is <span>{{$name}}</span><sup>{{$age}}yo</sup> and this is my CV</h1>
+              <h1>Hello,<br> my name is <span>{{$user->name}}</span><sup>yo</sup> and this is my CV</h1>
             </div>
           </div>
         </div>
@@ -25,18 +25,7 @@
           <div class="box">
             <h2>About Me</h2>
             <p>
-                LAMP stack backed developer.<br />
-                My career goal is to attain a level of skill and expertise which enables me to solve all personal, professional and social challenges that I face.<br />
-
-                When linus torvalds invented Linux, he was faced with a real problem. Despite of trying real hard to find some, he couldn't find a usable and cheap Unix OS for his own system. And with his knowledge of the computer system, he asked himself "How hard it could be to write my own OS". And with his indepth understanding of computers, skill and expertise he went to write his own OS Kernel. <br />
-
-                This is precisely what i want to achieve. In the future i see myself having this level of skill and expertise that if i face a real problem, I could ask myself "how hard can it be to write my own sollution for it?" and i would go ahead and solve it. <br />
-
-                I highly admire the Open Source philosophy and intend to contribute quality code to the Open Source community. <br />
-
-                As Eric S Raymond says, "The world is full of Interesting problems waiting to be solved and one should never waste time reinventing the wheel". I am a proud believer of the hacker culture (not cracker, breaching security).<br />
-
-                Software Engineer by choice and I do software because it's fun. Highly interested in learning Internal functioning of the system. At the end of the day, doing what I like is what matters most to me.<br />
+                {{$user->description}}
             </p>
           </div>
           <!-- EDUCATION -->
@@ -102,6 +91,15 @@
           <!-- CONTACT -->
           <div class="box clearfix">
             <h2>Contact</h2>
+            @if (isset($contacts))
+            @foreach ($contacts as $contact)
+            <div class="contact-item">
+              <div class="icon pull-left text-center"><span class="fa fa-envelope fa-fw"></span></div>
+              <div class="title only pull-right">{{$contact->value}}</div>
+            </div>
+            @endforeach
+
+            @else
             <div class="contact-item">
               <div class="icon pull-left text-center"><span class="fa fa-phone fa-fw"></span></div>
               <div class="title only pull-right">500 345 242</div>
@@ -125,16 +123,24 @@
               <div class="title pull-right">Skype</div>
               <div class="description pull-right">kamsolutions.pl</div>
             </div>
+            @endif
           </div>
           <!-- SKILLS -->
           <div class="box">
             <h2>Skills</h2>
             <div class="skills">
+                @if (isset($skills) && count($skills) > 0)
+                @foreach ($skills as $skill)
+                <div class="item-skills" data-percent="{{$skill->proficiency/100.00}}">{{$skill->name}}</div>
+                @endforeach
+
+                @else
               <div class="item-skills" data-percent="1.00">HTML</div>
               <div class="item-skills" data-percent="0.90">CSS</div>
               <div class="item-skills" data-percent="0.80">jQuery</div>
               <div class="item-skills" data-percent="0.75">PHP</div>
               <div class="item-skills" data-percent="0.25">Laravel 2 (framework)</div>
+                @endif
               <div class="skills-legend clearfix">
                 <div class="legend-left legend">Beginner</div>
                 <div class="legend-left legend"><span>Proficient</span></div>
@@ -147,16 +153,30 @@
           <div class="box">
             <h2>Languages</h2>
             <div id="language-skills">
+            @if (isset($languages) && count($languages) > 0)
+            @foreach ($languages as $language)
+                <div class="skill">{{$language->name}} <div class="icons pull-right"><div style="width: {{$language->pivot->proficiency}}%;" class="icons-red"></div></div></div>
+            @endforeach
+
+            @else
               <div class="skill">Polish <div class="icons pull-right"><div style="width: 80%;" class="icons-red"></div></div></div>
               <div class="skill">English <div class="icons pull-right"><div style="width: 60%;" class="icons-red"></div></div></div>
+            @endif
             </div>
           </div>
           <!-- HOBBIES -->
           <div class="box">
             <h2>Hobbies</h2>
+            @if (isset($hobbies) && count($hobbies) > 0)
+            @foreach ($hobbies as $hobby)
+            <div class="hobby">{{$hobby->name}}</div>
+            @endforeach
+
+            @else
             <div class="hobby">Photography</div>
             <div class="hobby">Fitness</div>
             <div class="hobby">Programming</div>
+            @endif
           </div>
         </div>
       </div>

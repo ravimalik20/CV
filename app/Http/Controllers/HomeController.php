@@ -6,14 +6,32 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
+
 class HomeController extends Controller
 {
     public function index()
     {
-        $data = [
-            "name" => "Ravi Malik",
-            "age" => "22"
-        ];
+        $data = [];
+
+        $user = User::firstOrFail();
+        $data["user"] = $user;
+
+        $contacts = $user->contacts();
+        if (count ($contacts) > 0)
+            $data["contacts"] = $contacts;
+
+        $skills = $user->skills;
+        if (count($skills) > 0)
+            $data["skills"] = $skills;
+
+        $languages = $user->languages;
+        if (count($languages) > 0)
+            $data["languages"] = $languages;
+
+        $hobbies = $user->hobbies;
+        if (count($hobbies) > 0)
+            $data["hobbies"] = $hobbies;
 
         return view("home", $data);
     }
