@@ -32,6 +32,18 @@
           <div class="box">
             <h2>Education</h2>
             <ul id="education" class="clearfix">
+            @if (isset($educations) && count($educations) > 0)
+            @foreach($educations as $education)
+              <li>
+                <div class="year pull-left">{{date("Y", strtotime($education->to))}}</div>
+                <div class="description pull-right">
+                  <h3>{{$education->title}}</h3>
+                  <p>{{$education->description}}</p>
+                </div>
+              </li>
+            @endforeach
+
+            @else
               <li>
                 <div class="year pull-left">2010</div>
                 <div class="description pull-right">
@@ -60,11 +72,27 @@
                   <p>Ducimus, aliquam tempore autem itaque et accusantium!</p>
                 </div>
               </li>
+            @endif
             </ul>
           </div>
           <!-- EXPERIENCES -->
           <div class="box">
             <h2>Experiences</h2>
+            @if(isset($experiences) && count($experiences) > 0)
+            @foreach ($experiences as $experience)
+            <div class="job clearfix">
+              <div class="col-xs-3">
+                <div class="where">{{$experience->company_name}}</div>
+                <div class="year">{{date("M-Y", strtotime($experience->from))}} - {{date("M-Y", strtotime($experience->to))}}</div>
+              </div>
+              <div class="col-xs-9">
+                <div class="profession">{{$experience->title}}</div>
+                <div class="description">{{$experience->description}}</div>
+              </div>
+            </div>
+            @endforeach
+
+            @else
             <div class="job clearfix">
               <div class="col-xs-3">
                 <div class="where">Google</div>
@@ -85,6 +113,7 @@
                 <div class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam, nihil sit nemo voluptatem praesentium. Quia, qui facere consectetur libero asperiores fugiat consequuntur deserunt culpa repudiandae sed quidem voluptas explicabo soluta.</div>
               </div>
             </div>
+            @endif
           </div>
         </div>
         <div class="col-xs-12 col-sm-5">

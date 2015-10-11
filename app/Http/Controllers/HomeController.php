@@ -33,6 +33,14 @@ class HomeController extends Controller
         if (count($hobbies) > 0)
             $data["hobbies"] = $hobbies;
 
+        $educations = $user->educations;
+        if (count($educations) > 0)
+            $data["educations"] = $educations;
+
+        $experiences = $user->experiences();
+        if (count($experiences) > 0)
+            $data["experiences"] = $experiences;
+
         return view("home", $data);
     }
 }
