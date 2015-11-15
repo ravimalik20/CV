@@ -14,7 +14,7 @@
               <img src="{{URL::to('/assets/img/display_pic.jpg')}}" alt="avatar">
             </div>
             <div id="text-header">
-              <h1>Hello,<br> my name is <span>{{$user->name}}</span><sup>yo</sup> and this is my CV</h1>
+              <h1>Hello,<br> my name is <span>{{$user->name}}</span>@if(isset($age) && $age)<sup>{{$age}}yo</sup>@endif and this is my CV</h1>
             </div>
           </div>
         </div>

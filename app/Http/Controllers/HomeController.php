@@ -41,6 +41,16 @@ class HomeController extends Controller
         if (count($experiences) > 0)
             $data["experiences"] = $experiences;
 
+        if ($user->dob != "0000-00-00") {
+            $dob = strtotime($user->dob);
+            $today = strtotime(date("Y-m-d"));
+
+            $diff = $today-$dob;
+            $age = floor($diff / (365*60*60*24));
+
+            $data["age"] = $age;
+        }
+
         return view("home", $data);
     }
 }
