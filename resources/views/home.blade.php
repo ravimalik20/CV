@@ -25,7 +25,7 @@
           <div class="box">
             <h2>About Me</h2>
             <p>
-                {{$user->description}}
+                {!! nl2br($user->description) !!}
             </p>
           </div>
           <!-- EDUCATION -->
@@ -38,7 +38,7 @@
                 <div class="year pull-left">{{date("Y", strtotime($education->to))}}</div>
                 <div class="description pull-right">
                   <h3>{{$education->title}}</h3>
-                  <p>{{$education->description}}</p>
+                  <p>{!! nl2br($education->description) !!}</p>
                 </div>
               </li>
             @endforeach
@@ -87,7 +87,7 @@
               </div>
               <div class="col-xs-9">
                 <div class="profession">{{$experience->title}}</div>
-                <div class="description">{{$experience->description}}</div>
+                <div class="description">{!! nl2br($experience->description) !!}</div>
               </div>
             </div>
             @endforeach
